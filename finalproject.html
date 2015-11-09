@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Visualizing Mitochondrial Variation in Polluted Habitsts</title>
+
+
+<style type="text/css">
+text {font: 12px Helvetica;}
+</style>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js">  
+</script>
+</head>
+
+
+<body>
+<h2> Visualizing Mitochondrial Variation in Polluted Habitsts</h2>
+<p>By J.C.B. Nunez</p>
+<p</p>
+<br>
+<p> This visulization uses presents the data from Nunez et al. (in Review). It shows estimates of nucleotide diversity in 7 populations from the New Bedford Harbor Estuary: NBH (upper harbor), SYC, P, F, H. These five popullations have been exposed to Pollution. It also shows data from two reference "clean" populations SR and M. The aim is to compare the two population groups "clean" and "polluted" to determine the effects of pollution in the mtDNA of Fundulus.     
+ </p>
+
+<h3 class = "Poll_stats"> Sediment Pollution Exposure </h3>
+<h3 class = "LC50_stats">  Resistance Phenotype - LC50 (Nacci et. al 2002)</h3>
+<h3 class = "Pi_G"> Global Nucleotide Diversity </h3>
+
+<script>
+
+var w = 500,
+    h = 350;
+var padding = 50;
+
+var colors = {"NBH":"red", "SYC":"yellow", "P":"brown", "F":"orange", "H":"salmon", "SR":"blue", "M":"darkblue", "NBH_SE":"grey", "SYC_SE":"grey", "P_SE":"grey", "F_SE":"grey", "H_SE":"grey", "SR_SE":"grey", "M_SE":"grey" };
+
+ var drawbox = d3.select("body").append("svg")
+    .attr("width", (w*2)) 
+    .attr("height", h*2);
+
+
+var g = drawbox.append("g");
+
+var img = g.append("svg:image")
+    .attr("xlink:href", "https://github.com/Jcbnunez/finalproject/blob/master/NBH_Sites_Map.png?raw=true")
+    .attr("width", w*1.8)
+    .attr("height", h*1.8);
+
+
+
+ </script>
+ </body>
+
