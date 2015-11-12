@@ -13,8 +13,7 @@
 <body>
 <h2>Visualizing Mitochondrial Variation in Polluted Habitats</h2>
 <p><font face='Times'>By J.C.B. Nunez</font> </p>
-<p> <font face='Times'>This visulization uses presents the data from Nunez et al. (in Review). It shows estimates of nucleotide diversity in 7 populations from the New Bedford Harbor Estuary: NBH (upper harbor), SYC, P, F, H. These five popullations have been exposed to Pollution. It also shows data from two reference "clean" populations SR and M. The aim is to compare the two population groups "clean" and "polluted" to determine the effects of pollution in the mtDNA of Fundulus.     
- </font></p>
+<p> <font face='Times'>This visualization looks at fish genetics in relationship to pollution levels </font></p>
 
 <h2>Global Estimates</h2>
  <table style="width:100%">
@@ -44,12 +43,28 @@
     <td><h3 class = "rRNA-16"> rRNA-16 </h3></td>
   </tr>
 </table>
+
+
+
 <script>
+
 var w = 500,
-    h = 350;
+    h = 350-80;
 var padding = 50;
 
-var colors = {"NBH":"red", "SYC":"yellow", "P":"brown", "F":"orange", "H":"salmon", "SR":"blue", "M":"darkblue", "NBH_SE":"grey", "SYC_SE":"grey", "P_SE":"grey", "F_SE":"grey", "H_SE":"grey", "SR_SE":"grey", "M_SE":"grey" };
+var dataset = [
+
+["NBH",	w+(w*0.50),	h-(h*0.36),	[[0.361553521, 0.04317057], [0.323779273, 0.107926424]]]
+
+
+];
+
+var maxG = d3.max(dataset, function(d) {return (d[3][0][0])+(d[3][0][1]);});
+var minG = d3.min(dataset, function(d) {return (d[3][0][0])+(d[3][0][1]);});
+
+
+
+var colors = { "NBH":"red", "SYC":"yellow", "P":"brown", "F":"orange", "H":"salmon", "SR":"blue", "M":"darkblue", "NBH_SE":"grey", "SYC_SE":"grey", "P_SE":"grey", "F_SE":"grey", "H_SE":"grey", "SR_SE":"grey", "M_SE":"grey" };
 
  var drawbox = d3.select("body").append("svg")
     .attr("width", (w*2)) 
@@ -73,10 +88,21 @@ var img = g.append("svg:image")
   //M -> x = w - (w*0.15), y = h - (h*0.36)
   //SR -> x = w - (w*0.75), y = h + (h*0.50)
 
-var circle = drawbox.append("circle")
-.attr("cx", w + (w*0.76))
-.attr("cy", h + (h*0.07))
-.attr("r", 10)
+var r_scale = d3.scale.linear()
+		.domain([minG, maxG])
+		.range([10, 100]); 
+
+
+drawbox.selectAll("circle")
+	.data(dataset)
+	.enter()
+	.append("circle")
+	.attr("cx", function(d) {return d[1];})
+	.attr("cy", function(d) {return d[2];})
+	.attr("r", function(d) {return r_scale(d[3][0][0]);})
+	.attr("fill", function(d) {return colors[d[0]];})
+	.attr("opacity", 1);
+
 
 
  </script>
