@@ -3,33 +3,48 @@
 <head>
 <meta charset="utf-8">
 <title>Visualizing Mitochondrial Variation in Polluted Habitsts</title>
-
-
-<style type="text/css">
-text {font: 12px Helvetica;}
-</style>
-
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js">  
 </script>
+<style type="text/css">
+</style>
 </head>
 
 
 <body>
-<h2> Visualizing Mitochondrial Variation in Polluted Habitsts</h2>
-<p>By J.C.B. Nunez</p>
-<p</p>
-<br>
-<p> This visulization uses presents the data from Nunez et al. (in Review). It shows estimates of nucleotide diversity in 7 populations from the New Bedford Harbor Estuary: NBH (upper harbor), SYC, P, F, H. These five popullations have been exposed to Pollution. It also shows data from two reference "clean" populations SR and M. The aim is to compare the two population groups "clean" and "polluted" to determine the effects of pollution in the mtDNA of Fundulus.     
- </p>
+<h2>Visualizing Mitochondrial Variation in Polluted Habitats</h2>
+<p><font face='Times'>By J.C.B. Nunez</font> </p>
+<p> <font face='Times'>This visulization uses presents the data from Nunez et al. (in Review). It shows estimates of nucleotide diversity in 7 populations from the New Bedford Harbor Estuary: NBH (upper harbor), SYC, P, F, H. These five popullations have been exposed to Pollution. It also shows data from two reference "clean" populations SR and M. The aim is to compare the two population groups "clean" and "polluted" to determine the effects of pollution in the mtDNA of Fundulus.     
+ </font></p>
 
-<h3 class = "Poll_stats"> Sediment Pollution Exposure </h3>
-<h3 class = "LC50_stats">  Resistance Phenotype - LC50 (Nacci et. al 2002)</h3>
-<h3 class = "Pi_G"> Global Nucleotide Diversity </h3>
-
+<h2>Global Estimates</h2>
+ <table style="width:100%">
+  <tr>
+    <td><h3 class = "Poll_stats"> Sediment Pollution Exposure </h3></td>
+    <td><h3 class = "LC50_stats">  Resistance Phenotype - LC50 (Nacci et. al 2002)</h3></td>		
+    <td><h3 class = "Pi_G"> Global Nucleotide Diversity </h3></td>
+  </tr>
+</table>
+<h2>Gene-by-Gene Estimates</h2>
+ <table style="width:100%">
+  <tr>
+    <td><h3 class = "ND1"> ND1 </h3></td>
+    <td><h3 class = "ND2">  ND2 </h3></td>		
+    <td><h3 class = "ND3"> ND3 </h3></td>
+    <td><h3 class = "ND4"> ND4 </h3></td>
+    <td><h3 class = "ND4L"> ND4L </h3></td>
+    <td><h3 class = "ND5">  ND5</h3></td>		
+    <td><h3 class = "ND6"> ND6 </h3></td>
+    <td><h3 class = "COI"> COI</h3></td>		
+    <td><h3 class = "COII"> COII </h3></td>
+    <td><h3 class = "COIII"> COIII</h3></td>
+    <td><h3 class = "ATP6">  ATP6</h3></td>		
+    <td><h3 class = "ATP8"> ATP8</h3></td>
+    <td><h3 class = "CYB"> CYTB </h3></td>
+    <td><h3 class = "rRNA-12">  rRNA-12 </h3></td>		
+    <td><h3 class = "rRNA-16"> rRNA-16 </h3></td>
+  </tr>
+</table>
 <script>
-
 var w = 500,
     h = 350;
 var padding = 50;
@@ -38,28 +53,29 @@ var colors = {"NBH":"red", "SYC":"yellow", "P":"brown", "F":"orange", "H":"salmo
 
  var drawbox = d3.select("body").append("svg")
     .attr("width", (w*2)) 
-    .attr("height", h*2);
+    .attr("height", (h*2));
 
 
 var g = drawbox.append("g");
 
 var img = g.append("svg:image")
     .attr("xlink:href", "https://github.com/Jcbnunez/finalproject/blob/master/NBH_Sites_Map.png?raw=true")
-    .attr("width", w*1.8)
-    .attr("height", h*1.8);
+    .attr("width", w*2)
+    .attr("height", h*2);
 
   //x,y coordinates for populations
-  //NBH ->  x = w - (w*0.27), y = h - (h*0.916)
-  //SYC =
-  //P =
-  //F =
-  //H =
-  //M =
-  //SR =
+  //Cline -> x = w-(w*0.55), y = h-(h*0.32)
+  //NBH ->  x = w+(w*0.50), y = h-(h*0.36)
+  //SYC -> x = w+(w*0.50), y = h-(h*0.20)
+  //P -> x =  w+ (w*0.546), y = h - (h*0.14)
+  //F -> x = w + (w*0.6), y = h + (h*0.07)
+  //H -> x = w + (w*0.76), y =  h + (h*0.07)
+  //M -> x = w - (w*0.15), y = h - (h*0.36)
+  //SR -> x = w - (w*0.75), y = h + (h*0.50)
 
 var circle = drawbox.append("circle")
-.attr("cx", w - (w*0.27))
-.attr("cy", h - (h*0.916))
+.attr("cx", w + (w*0.76))
+.attr("cy", h + (h*0.07))
 .attr("r", 10)
 
 
