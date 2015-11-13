@@ -1,5 +1,7 @@
 This is JCBN's Fork of the final project
 
+Quick Link to see visualization: https://rawgit.com/Jcbnunez/finalproject/master/finalproject.html
+
 _____________
 
 # Final Project
@@ -12,16 +14,18 @@ Expand on the readme questions below to provide an overview of the goals, backgr
 
 ## Introduction
 
-This is a final project for the [Interacting with Data](https://github.com/Brown-BIOL2430-S04-Fall2015/syllabus) seminar in fall 2015. This project (a very brief, ie 1-2 sentence, overview of the project)...
+This is a final project for the [Interacting with Data](https://github.com/Brown-BIOL2430-S04-Fall2015/syllabus) seminar in fall 2015. This project seeks to produce an interactive visualization for real genetic data and it relationship with an ecological variable that behaves ina  clinal fashion. 
 
-To view this project, ... (embed visualization here or provide instructions on how to view the project).
+Some visualizations of genetic data tend to decouple the ecological or geographical variables with genetic variables, often showing them as individual plots. This is not detrimental to the science as the reader has the power to use the information form individual plots and see patterns among all the data. However, the idea of this visualization is to ease the incorporation of genetic and ecological or geographical data into single informative plots with multiple graphical elements.    
+
+To view this project please visit https://rawgit.com/Jcbnunez/finalproject/master/finalproject.html
 
 ## The data
 
 Description of data...
 
-- Data source (simulated/ published/ unpublished?)
-- Data structure - what are the variables? How are they organized? What states can they have
+- Data source: Unpublished genetic variation data from fish. As it is unpublished, data has been anonymized  
+- Data structure: The data encompasses mesures of variation with estimates of statistical confidence. The data is available for 7 populations across an ecological gradient. The data also described complete genome estimates of variation and gene by gene estimates (for 7 genes).   
 
 ## Background
 
