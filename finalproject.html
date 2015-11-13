@@ -43,28 +43,50 @@ var padding = 50;
 
 var dataset = [
 
-["NBH",	w+(w*0.50),h-(h*0.36),	[[0.361553521, 0.04317057], [0.323779273, 0.107926424],[0.5, 0.2]]],
-["SYC",w+(w*0.50),h-(h*0.20),[[0.3561572,0.048566891],[0.431705697,0.107926424],[0.5, 0.2]]],
-["P",w+(w*0.546),h-(h*0.14),[[0.307590309,0.04317057],[0.539632121,0.161889636],[0.5, 0.2]]],
-["F",w+(w*0.6),h+(h*0.07),[[0.339968236,0.048566891],[0.647558546,0.215852849],[0.5, 0.2]]],
-["H",w+(w*0.76),h+(h*0.07),[[0.242834455,0.032377927],[0.485668909,0.107926424],[0.5, 0.2]]],
-["M",w-(w*0.15),h-(h*0.36),[[0.323779273,0.037774248],[0.485668909,0.053963212],[0.5, 0.2]]],
-["SR",w-(w*0.75),h+(h*0.50),[[0.31298663,0.037774248],[0.107926424,0.053963212],[0.5, 0.2]]],
-["Cline",w-(w*0.55),h-(h*0.32),[[0.323779273,0.021585285],[0.269816061,0.107926424],[0.5, 0.2]]]
+["NBH",w+(w*0.50),h-(h*0.36),[[0.361553521,0.04317057],[0.323779273,0.107926424],[0.053963212,0.053963212],[0.809448182,0.269816061],[0.377742485,0.107926424],[0.377742485,0.215852849],[1.025301031,0.161889636],[0.809448182,0.161889636]]],
+["SYC",w+(w*0.50),h-(h*0.20),[[0.3561572,0.048566891],[0.431705697,0.107926424],[0.269816061,0.107926424],[0.215852849,0.215852849],[0.107926424,0.053963212],[0,0],[0.701521758,0.215852849],[0.593595333,0.161889636]]],
+["P",w+(w*0.546),h-(h*0.14),[[0.307590309,0.04317057],[0.539632121,0.161889636],[0.161889636,0.107926424],[0.593595333,0.215852849],[0.485668909,0.161889636],[0,0],[0.485668909,0.161889636],[0.377742485,0.107926424]]],
+["F",w+(w*0.6),h+(h*0.07),[[0.339968236,0.048566891],[0.647558546,0.215852849],[0.377742485,0.161889636],[0.917374606,0.377742485],[0.593595333,0.161889636],[0.377742485,0],[0.269816061,0.215852849],[0.269816061,0.161889636]]],
+["H",w+(w*0.76),h+(h*0.07),[[0.242834455,0.032377927],[0.485668909,0.107926424],[0.647558546,0.161889636],[0.431705697,0.269816061],[0.431705697,0.161889636],[0,0],[0.161889636,0.053963212],[0.161889636,0.161889636]]],
+["M",w-(w*0.15),h-(h*0.36),[[0.323779273,0.037774248],[0.485668909,0.053963212],[0.107926424,0.053963212],[0.215852849,0.215852849],[0.053963212,0.053963212],[0.485668909,0.269816061],[0.809448182,0.161889636],[0.647558546,0.161889636]]],
+["SR",w-(w*0.75),h+(h*0.50),[[0.31298663,0.037774248],[0.107926424,0.053963212],[0.323779273,0.107926424],[0,0],[,0.215852849,0.053963212],[0,0],[0.161889636,0.053963212],[0.215852849,0.215852849]]],
+["Cline",w-(w*0.55),h-(h*0.32),[[0.323779273,0.021585285],[0.269816061,0.107926424],[0.269816061,0.053963212],[0.593595333,0.161889636],[0.377742485,0.053963212],[0.161889636,0.053963212],[0.593595333,0.107926424],[0.485668909,0.053963212]]]
 
 
 
 
 ];
 
-var maxG = d3.max(dataset, function(d) {return (d[3][0][0])+(d[3][0][1]);});
-var minG = d3.min(dataset, function(d) {return (d[3][0][0])-(d[3][0][1]);});
+var maxGo = d3.max(dataset, function(d) {return (d[3][0][0])+(d[3][0][1]);});
+var minGo = d3.min(dataset, function(d) {return (d[3][0][0])-(d[3][0][1]);});
 
 var maxA = d3.max(dataset, function(d) {return (d[3][1][0])+(d[3][1][1]);});
 var minA = d3.min(dataset, function(d) {return (d[3][1][0])-(d[3][1][1]);});
 
 var maxB = d3.max(dataset, function(d) {return (d[3][2][0])+(d[3][2][1]);});
 var minB = d3.min(dataset, function(d) {return (d[3][2][0])-(d[3][2][1]);});
+
+var maxC = d3.max(dataset, function(d) {return (d[3][3][0])+(d[3][3][1]);});
+var minC = d3.min(dataset, function(d) {return (d[3][3][0])-(d[3][3][1]);});
+
+var maxD = d3.max(dataset, function(d) {return (d[3][4][0])+(d[3][4][1]);});
+var minD = d3.min(dataset, function(d) {return (d[3][4][0])-(d[3][4][1]);});
+
+var maxE = d3.max(dataset, function(d) {return (d[3][5][0])+(d[3][5][1]);});
+var minE = d3.min(dataset, function(d) {return (d[3][5][0])-(d[3][5][1]);});
+
+var maxF = d3.max(dataset, function(d) {return (d[3][6][0])+(d[3][6][1]);});
+var minF = d3.min(dataset, function(d) {return (d[3][6][0])-(d[3][6][1]);});
+
+var maxG = d3.max(dataset, function(d) {return (d[3][7][0])+(d[3][7][1]);});
+var minG = d3.min(dataset, function(d) {return (d[3][7][0])-(d[3][7][1]);});
+
+
+
+
+
+
+
  
 
 var colors = { "NBH":"red", "SYC":"yellow", "P":"brown", "F":"orange", "H":"salmon", "SR":"blue", "M":"darkblue", "NBH_SE":"grey", "SYC_SE":"grey", "P_SE":"grey", "F_SE":"grey", "H_SE":"grey", "SR_SE":"grey", "M_SE":"grey", "Cline" : "Purple" };
@@ -101,7 +123,7 @@ var img = g.append("svg:image")
 
 	
 var r_scale = d3.scale.linear()
-		.domain([minG, maxG])
+		.domain([minGo, maxGo])
 		.range([10, 30]); 
 
 
@@ -146,6 +168,41 @@ function pulse() {
 			})();}
 
 
+//Global
+
+d3.select("h3.Pi_G").on("click", function() {
+   	durac = 100;
+	
+r_scale.domain([minGo, maxGo]);
+
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][0][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][0][0]) + r_scale(d[3][0][1]));})
+	.attr("fill", function(d) {return colors[d[0]];})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][0][0]) - r_scale(d[3][0][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][0][0]) + r_scale(d[3][0][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+});
 
 //Gene A
 
@@ -181,43 +238,7 @@ function pulse() {
 
 });
 
-//Global
-
-d3.select("h3.B").on("click", function() {
-   	durac = 100;
-	
-r_scale.domain([minG, maxG]);
-
-
-drawbox.selectAll("circle.M")
-.transition().duration(durac).ease("cubic-in-out")
-	.attr("r", function(d) {return r_scale(d[3][0][0]);});
-
-drawbox.selectAll("circle.S")
-.transition().duration(durac).ease("cubic-in-out")
-	.attr("r", function(d) {return (r_scale(d[3][0][0]) + r_scale(d[3][0][1]));})
-	.attr("fill", function(d) {return colors[d[0]];})
-	.each(pulse)
-	;
-
-function pulse() {
-			var circle = drawbox.selectAll("circle.S");
-			(function repeat() {
-				circle = circle.transition()
-					.duration(2000)
-					.attr("stroke-width", 2)
-					.attr("r", function(d) {return (r_scale(d[3][0][0]) - r_scale(d[3][0][1]));})
-					.transition()
-					.duration(2000)
-					.attr('stroke-width', 2)
-					.attr("r", function(d) {return (r_scale(d[3][0][0]) + r_scale(d[3][0][1]));})
-					.ease('sine')
-					.each("end", repeat);
-			})();}
-
-});
-
-//test
+//GeneB
 
 d3.select("h3.B").on("click", function() {
    	durac = 100;
@@ -250,6 +271,179 @@ function pulse() {
 			})();}
 
 });
+
+//GeneC
+
+d3.select("h3.C").on("click", function() {
+   	durac = 100;
+
+r_scale.domain([minC, maxC]);
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][3][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][3][0]) + r_scale(d[3][3][1]));})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][3][0]) - r_scale(d[3][3][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][3][0]) + r_scale(d[3][3][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+});
+
+//GeneD
+
+d3.select("h3.D").on("click", function() {
+   	durac = 100;
+
+r_scale.domain([minD, maxD]);
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][4][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][4][0]) + r_scale(d[3][4][1]));})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][4][0]) - r_scale(d[3][4][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][4][0]) + r_scale(d[3][4][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+});
+
+//GeneE
+
+d3.select("h3.E").on("click", function() {
+   	durac = 100;
+
+r_scale.domain([minE, maxE]);
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][5][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][5][0]) + r_scale(d[3][5][1]));})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][5][0]) - r_scale(d[3][5][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][5][0]) + r_scale(d[3][5][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+});
+
+//GeneF
+
+d3.select("h3.F").on("click", function() {
+   	durac = 100;
+
+r_scale.domain([minE, maxE]);
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][6][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][6][0]) + r_scale(d[3][6][1]));})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][6][0]) - r_scale(d[3][6][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][6][0]) + r_scale(d[3][6][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+});
+
+//GeneG
+
+d3.select("h3.G").on("click", function() {
+   	durac = 100;
+
+r_scale.domain([minG, maxG]);
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][7][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][7][0]) + r_scale(d[3][7][1]));})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][7][0]) - r_scale(d[3][7][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][7][0]) + r_scale(d[3][7][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+});
+
+
+
 
  </script>
  </body>
