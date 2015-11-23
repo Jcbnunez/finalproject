@@ -83,7 +83,7 @@ var minG = d3.min(dataset, function(d) {return (d[3][7][0])-(d[3][7][1]);});
 
 var Yscale = d3.scale.linear()
 			.domain([minGo, maxGo])
-			.range([0, 50]);
+			.range([0, 60]);
  
 
 var colors = { "NBH":"red", "SYC":"yellow", "P":"brown", "F":"orange", "H":"salmon", "SR":"blue", "M":"darkblue", "NBH_SE":"grey", "SYC_SE":"grey", "P_SE":"grey", "F_SE":"grey", "H_SE":"grey", "SR_SE":"grey", "M_SE":"grey", "Cline" : "Purple" };
@@ -201,6 +201,21 @@ drawbox.selectAll("rect.hist").data(dataset).enter().append("rect")
 	.attr("width", 20)
 	.attr("fill", function(d) {return colors[d[0]];})
 	.attr("height", function(d) {return Yscale(d[3][0][0]);});
+
+
+//Drawing Genome
+
+drawbox.selectAll("rect.chrm")
+	.data(dataset)
+ 	.enter()
+	.append("rect")
+	.attr("class", "chrm")
+	.attr("x", 100)
+ 	.attr("y", 100)
+	.attr("width", 20)
+	.attr("fill", "black")
+	.attr("height", 20);
+
 
 //Global
 
@@ -487,7 +502,7 @@ Yscale.domain([minF, maxF]);
 
 drawbox.selectAll("rect.hist")
 	.transition().duration(durac).ease("linear")
-	.attr("height", function(d) {return Yscale(d[3][5][0]);});
+	.attr("height", function(d) {return Yscale(d[3][6][0]);});
 
 });
 
@@ -537,4 +552,3 @@ drawbox.selectAll("rect.hist")
 
  </script>
  </body>
-
