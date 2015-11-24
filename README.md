@@ -29,40 +29,46 @@ Description of data...
 
 ## Background
 
-Examples of previous visualizations of similar data or processes, if any exist... Include links or add images to markdown document... how were data mapped to aesthetics in these previous approaches? Was there filtering?
+Previous visualization of these data were mostly two-dimentional and static. This is, in order to fully explore the data the reader had to parse together mutiple 2D graphs of estimates of the whole chromosome and all individual genes. Also the geographic component of the data was althoghther excluded. 
 
-Shortcomings of previous approaches, or potentially interesting gaps between previous approaches...
+This visualization addresses the shortcomings of previous visuzaliations in two ways. First, it retains the geogrpahic component of the data by plotting the data both on a traditional 2D plot as well as mapped to a geogrpahic map of the microhabiat cline. Thus recovering the geographic component. Second, and perhaps most importantly, all the graphs has been condenced into a single plot. Now the user can freely navigate the diversity estimates of all populations for the whole chromosome as well as for each Gene by simply navigating the visulization. Not only all information is contained in a single visualization. All estimates are escaled equally, which allows for easy comparisons. 
 
 ## This project
 
 ### Mapping of data to aesthetics
 
-How will aesthetic attributes ( X / Y / color / shape / size /texture / etc ) will be mapped to the data?
+**Traditional Mapping**: The lower right corner of the vosualization will contain a traditional x/y plot showing sample name (x) and estimate (y). 
+
+**Novel Mapping**: Estimates of diversity will be transformed to radial measures and plotted as circles on a map with the estimates of estandard error (SE) as a pulsating circle around the mean estimate (non-pulsating circle). Moreover, above the main visualization, the user will have access to a diagram of the full chromosome. All shown genes are interactive.
 
 ### Filtering
 
-Are data filtered? ie in some views are some data not mapped to particular attributes of the image? What is the goal of the filtering?
+Data has been annonymized. The measures of SE are only shown in the pulsating visulization for minimalists purposes. 
 
 ### Extra ink
 
-Are there aesthetic attributes that are not mapped to the data? If so, what purpose do they serve ( redundancy for robustness / improve visual metaphor / but data in context / beauty / etc )?
+Background map and inset map are not generated from the data, however, they locate the data in a geographical scale, thus improving the delivery of the information. *i.e.* the concept of variation across a microhabitat cline is more clear when the geograohic cline itsefl id shown.
 
-Are any data mapped to more than one aesthetic attribute? Why?
+The measures of diversity are mapped to both the cirlces on the map and the bargraph on the lower left inset. This serves two purposes: One, reinforces the message. Two, provides a conrast of an old "clasical view" and a new view. The goal is to make it intituitive to the broadest audience possible.
 
 ### Motion
 
-If motion is used, what purpose does it serve ( metaphor (eg representing motion in real world) / transition continuity between views / etc )
+Transitions are used briefly. Text magnification is used when exploring the chromosome. The bulk of the motion is used in the pulsating circles that indicate the upper and lower bounds of the SE around the mean. 
 
 ### Perspective
 
-To what extent is perspective (eg mappings) controlled by users vs hard coded in advance? How does this project aid in exploration vs exposition?
+Exposition: Popuations, overall number of genes and geographical locations are hard-coded. given the data.
 
-## Assessment
+Exploration: The user can chose which Gene to visualize each time.
 
-Was the new visualization successful at providing insight that was not possible or more difficult with previous approaches?
+## Assessmentces
 
-What are the main limitations of new approach?
+Succeses: Defeinitely the bigger success of this visualizaion lies in the consolidation of multiple graphs into one single graph.
 
-What are future directions this could go in?
+Limitations: It is unclear that the "geographical mapping of the estimates" is as clear as it could be. In some cases it has been considered gimmicky. 
+
+Future Directions: Adding more genes, more chromosomes, more populations. Also, addition of other estimators such as Fst will enhance the power of the graph.
+
+-jcbn
 
 

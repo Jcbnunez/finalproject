@@ -2,58 +2,82 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Visualizing Genetic Variation in Polluted Habitsts</title>
+<title>Visualizing Genetic Variation in Clinal Microhabitats</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js">  
 </script>
 <style type="text/css">
+
+.yAxisRight path,
+			.yAxisRight line {
+				fill: none;
+				stroke: black;
+				shape-rendering: crispEdges;
+			}
+			
+			.yAxisRight text {
+				font-family: sans-serif;
+				font-size: 6px;
+			}
+
+
+.yAxisLeft path,
+			.yAxisLeft line {
+				fill: none;
+				stroke: black;
+				shape-rendering: crispEdges;
+			}
+			
+			.yAxisLeft text {
+				font-family: sans-serif;
+				font-size: 6px;
+			}
+
 </style>
 </head>
 
 
 <body>
-<h2>Visualizing Genetic Variation in Polluted Habitats</h2>
+<h2>Visualizing Genetic Variation in Clinal Habitats</h2>
 <p><font face='Times'>By J.C.B. Nunez</font> </p>
-<p> <font face='Times'>This visualization looks at fish genetics in relationship to pollution levels </font></p>
+<p> <font face='Times'>This visualization looks at a toy dataset of levels of fish genetic variation in a clinal microhabitat. This interactive plots allows the user to explore estimates of diversity in 5 clinal populations and 2 reference populations across a toy chromosome (Chrm-α) and its 7 Genes (A-G)</font></p>
 
   </tr>
-</table>
-<h2>Nucletide Diversity Estimates</h2>
- <table style="width:100%">
-  <tr>
-  	<td><h3 class = "Pi_G">Genome</h3></td>
-    <td><h3 class = "A"> Gene A </h3></td>
-    <td><h3 class = "B">  Gene B </h3></td>		
-    <td><h3 class = "C"> Gene C </h3></td>
-    <td><h3 class = "D"> Gene D </h3></td>
-    <td><h3 class = "E"> Gene E </h3></td>
-    <td><h3 class = "F">  Gene F</h3></td>		
-    <td><h3 class = "G"> Gene G </h3></td>
-
-
-  </tr>
-</table>
-
 
 
 <script>
 
 var w = 500,
     h = 270;
-var padding = 50;
+var padding = 250;
 
 var dataset = [
 
-["NBH",w+(w*0.50),h-(h*0.36),[[0.361553521,0.04317057],[0.323779273,0.107926424],[0.053963212,0.053963212],[0.809448182,0.269816061],[0.377742485,0.107926424],[0.377742485,0.215852849],[1.025301031,0.161889636],[0.809448182,0.161889636]],w+(w*0.70)],
-["SYC",w+(w*0.50),h-(h*0.20),[[0.3561572,0.048566891],[0.431705697,0.107926424],[0.269816061,0.107926424],[0.215852849,0.215852849],[0.107926424,0.053963212],[0,0],[0.701521758,0.215852849],[0.593595333,0.161889636]],w+(w*0.75)],
-["P",w+(w*0.546),h-(h*0.14),[[0.307590309,0.04317057],[0.539632121,0.161889636],[0.161889636,0.107926424],[0.593595333,0.215852849],[0.485668909,0.161889636],[0,0],[0.485668909,0.161889636],[0.377742485,0.107926424]],(w+w*0.80)],
+["NBH",w+(w*0.50),h-(h*0.62),[[0.361553521,0.04317057],[0.323779273,0.107926424],[0.053963212,0.053963212],[0.809448182,0.269816061],[0.377742485,0.107926424],[0.377742485,0.215852849],[1.025301031,0.161889636],[0.809448182,0.161889636]],w+(w*0.70)],
+["SYC",w+(w*0.50),h-(h*0.40),[[0.3561572,0.048566891],[0.431705697,0.107926424],[0.269816061,0.107926424],[0.215852849,0.215852849],[0.107926424,0.053963212],[0.02,0.004],[0.701521758,0.215852849],[0.593595333,0.161889636]],w+(w*0.75)],
+["P",w+(w*0.546),h-(h*0.14),[[0.307590309,0.04317057],[0.539632121,0.161889636],[0.161889636,0.107926424],[0.593595333,0.215852849],[0.485668909,0.161889636],[0.01,0.004],[0.485668909,0.161889636],[0.377742485,0.107926424]],(w+w*0.80)],
 ["F",w+(w*0.6),h+(h*0.07),[[0.339968236,0.048566891],[0.647558546,0.215852849],[0.377742485,0.161889636],[0.917374606,0.377742485],[0.593595333,0.161889636],[0.377742485,0.11],[0.269816061,0.215852849],[0.269816061,0.161889636]],w+(w*0.85)],
-["H",w+(w*0.76),h+(h*0.07),[[0.242834455,0.032377927],[0.485668909,0.107926424],[0.647558546,0.161889636],[0.431705697,0.269816061],[0.431705697,0.161889636],[0,0],[0.161889636,0.053963212],[0.161889636,0.161889636]],w+(w*0.90)],
+["H",w+(w*0.76),h+(h*0.07),[[0.242834455,0.032377927],[0.485668909,0.107926424],[0.647558546,0.161889636],[0.431705697,0.269816061],[0.431705697,0.161889636],[0.03,0.005],[0.161889636,0.053963212],[0.161889636,0.161889636]],w+(w*0.90)],
 ["M",w-(w*0.15),h-(h*0.36),[[0.323779273,0.037774248],[0.485668909,0.053963212],[0.107926424,0.053963212],[0.215852849,0.215852849],[0.053963212,0.053963212],[0.485668909,0.269816061],[0.809448182,0.161889636],[0.647558546,0.161889636]],w-(w*0.12)],
-["SR",w-(w*0.75),h+(h*0.50),[[0.31298663,0.037774248],[0.107926424,0.053963212],[0.323779273,0.107926424],[0,0],[,0.215852849,0.053963212],[0,0],[0.161889636,0.053963212],[0.215852849,0.215852849]],w-(w*0.17)],
+["SR",w-(w*0.75),h+(h*0.50),[[0.31298663,0.037774248],[0.107926424,0.053963212],[0.323779273,0.107926424],[0,0],[,0.215852849,0.053963212],[0.05,0.004],[0.161889636,0.053963212],[0.215852849,0.215852849]],w-(w*0.17)],
 ["Cline",w-(w*0.55),h-(h*0.32),[[0.323779273,0.021585285],[0.269816061,0.107926424],[0.269816061,0.053963212],[0.593595333,0.161889636],[0.377742485,0.053963212],[0.161889636,0.053963212],[0.593595333,0.107926424],[0.485668909,0.053963212]],w-(w*0.22)]
 
 
 
+
+];
+
+
+
+var namedataset = [
+
+["Chrm-α", 10, 0],
+["A", 130,50],
+["B", 260,40],
+["C", 390,90],
+["D", 520,37],
+["E", 650,100],
+["F", 780,60],
+["G", 910,70]
 
 ];
 
@@ -84,9 +108,32 @@ var minG = d3.min(dataset, function(d) {return (d[3][7][0])-(d[3][7][1]);});
 var Yscale = d3.scale.linear()
 			.domain([minGo, maxGo])
 			.range([0, 60]);
- 
+
+var Yaxscale = d3.scale.linear()
+			.domain([maxGo, minGo])
+			.range([0, 60]);
+
+//var yAxis = d3.svg.axis()
+  //  .scale(Yaxscale)
+    //.orient("left")
+    //.ticks(5);
+
+//var yAxis2 = d3.svg.axis()
+  //  .scale(Yaxscale)
+    //.orient("left")
+    //.ticks(5);
+
+
+ var yAxisLeft = d3.svg.axis().scale(Yaxscale)
+    .orient("left").ticks(5);
+
+var yAxisRight = d3.svg.axis().scale(Yaxscale)
+    .orient("left").ticks(5); 
 
 var colors = { "NBH":"red", "SYC":"yellow", "P":"brown", "F":"orange", "H":"salmon", "SR":"blue", "M":"darkblue", "NBH_SE":"grey", "SYC_SE":"grey", "P_SE":"grey", "F_SE":"grey", "H_SE":"grey", "SR_SE":"grey", "M_SE":"grey", "Cline" : "Purple" };
+
+
+var colors2 = { "A":"pink", "B":"salmon", "C":"lightgreen", "D":"turquoise", "E":"khaki", "F":"cyan", "G":"thistle", "Chrm-α":"white"};
 
  var drawbox = d3.select("body").append("svg")
     .attr("width", (w*2)) 
@@ -96,9 +143,10 @@ var colors = { "NBH":"red", "SYC":"yellow", "P":"brown", "F":"orange", "H":"salm
 var g = drawbox.append("g");
 
 var img = g.append("svg:image")
-    .attr("xlink:href", "https://github.com/Jcbnunez/finalproject/blob/master/NBH_Sites_Map4.png?raw=true")
+    .attr("xlink:href", "https://rawgit.com/Jcbnunez/finalproject/master/NBH_Sites_Map4.png")
     .attr("width", w*2)
     .attr("height", h*2);
+
 
 
 
@@ -123,7 +171,7 @@ var img = g.append("svg:image")
 	
 var r_scale = d3.scale.linear()
 		.domain([minGo, maxGo])
-		.range([0, 30]); 
+		.range([10, 40]); 
 
 
 drawbox.selectAll("circle.M")
@@ -175,9 +223,9 @@ function pulse() {
  	.enter()
 	.append("rect")
 	.attr("class", "blank1")
-	.attr("x", w - (w*0.25) )
+	.attr("x", w - (w*0.25) - 20 )
 	.attr("y", h + (h*0.41))
-	.attr("width", 100)
+	.attr("width", 120)
 	.attr("height", 100)
 	.style("fill", "floralwhite");
 
@@ -187,9 +235,9 @@ drawbox.selectAll("rect.blank2")
  	.enter()
 	.append("rect")
  	.attr("class", "blank2")
- 	.attr("x", w + (w*0.665) )
+ 	.attr("x", w + (w*0.665) - 20 )
  	.attr("y", h + (h*0.42))
- 	.attr("width", 150)
+ 	.attr("width", 170)
  	.attr("height", 100)
  	.style("fill", "floralwhite");
 
@@ -197,29 +245,124 @@ drawbox.selectAll("rect.blank2")
 drawbox.selectAll("rect.hist").data(dataset).enter().append("rect")
 	.attr("class", "hist")
 	.attr("x", function(d) {return d[4];})
- 	.attr("y", 410)
+ 	.attr("y", function(d) {return 460 - Yscale(d[3][0][0]);})
 	.attr("width", 20)
 	.attr("fill", function(d) {return colors[d[0]];})
 	.attr("height", function(d) {return Yscale(d[3][0][0]);});
 
 
-//Drawing Genome
+//Barcharts axes---------------------------~~~Axis1
+
+drawbox.append("g")
+    .attr("class", "yAxisRight")
+    .attr("transform", "translate(385 ,400)")
+    .call(yAxisRight);
+
+
+
+ //Barcharts axes---------------------------~~~Axis2
+
+drawbox.append("g")
+    .attr("class", "yAxisLeft")
+    .attr("transform", "translate(845 ,400)")
+    .call(yAxisLeft);
+
+
+
+//Drawing Chrm-α------------------------------
 
 drawbox.selectAll("rect.chrm")
 	.data(dataset)
  	.enter()
 	.append("rect")
 	.attr("class", "chrm")
-	.attr("x", 100)
- 	.attr("y", 100)
-	.attr("width", 20)
-	.attr("fill", "black")
-	.attr("height", 20);
+	.attr("x", 90)
+ 	.attr("y", 11)
+	.attr("width", 850)
+	.attr("fill", "sandybrown")
+	.attr("opacity", 0.8)
+	.attr("height", 5);
 
+
+//allchromosomeGene_button---------------
+
+drawbox.selectAll("rect.chrm1")
+	.data(namedataset)
+ 	.enter()
+	.append("rect")
+	.attr("class", "chrm1")
+	.attr("x", function(d) {return (d[1]) - 20;})
+	.attr("height", 16)
+	.attr("width", function(d) {return (d[2]);})
+ 	.attr("y", 5)
+	.attr("fill", function(d) {return colors2[d[0]];});
+
+//text------------------
+
+drawbox.selectAll("text.gene")
+.data(namedataset)
+ 	.enter()
+	.append("text")
+	.attr("class", "gene")
+	.attr("id", function(d) {return d[0];})
+	.attr("x", function(d) {return (d[1]);})
+	.text( function(d) {return d[0];})
+	.style("font-size", "10px")
+	.style("font-family", "arial-black")
+	.attr("fill", "black")
+ 	.attr("y", 16)
+	.on("mouseover", function() { d3.select(this).transition().duration(300).style("font-size", "17px");})
+    .on("mouseout", function(d) { d3.select(this).transition().duration(300).style("font-size", "10px").transition().duration(300);});
+
+
+//Legends descriptions
+
+drawbox.selectAll("text.desc")
+.data(namedataset)
+ 	.enter()
+	.append("text")
+	.attr("class", "desc")
+	.attr("x", 370)
+	.text("Estimates of Diversity")
+	.style("font-size", "10px")
+	.style("font-family", "arial")
+	.attr("fill", "black")
+ 	.attr("y", 395);
+
+drawbox.selectAll("text.desc1")
+.data(namedataset)
+ 	.enter()
+	.append("text")
+	.attr("class", "desc1")
+	.attr("x", 845)
+	.text("Estimates of Diversity: Cline")
+	.style("font-size", "10px")
+	.style("font-family", "arial")
+	.attr("fill", "black")
+ 	.attr("y", 395);
+
+//Bar Graphs X axis
+
+
+drawbox.selectAll("text.xax")
+.data(dataset)
+ 	.enter()
+	.append("text")
+	.attr("class", "desc1")
+	.attr("x", function(d) {return 3+ d[4];})
+	.text(function(d) {return d[0];})
+	.style("font-size", "7px")
+	.style("font-family", "arial")
+	.attr("fill", "black")
+ 	.attr("y", 470);
+
+
+
+/////Transitions
 
 //Global
 
-d3.select("h3.Pi_G").on("click", function() {
+d3.select("text#Chrm-α.gene").on("click", function() {
    	durac = 100;
 	
 r_scale.domain([minGo, maxGo]);
@@ -256,6 +399,7 @@ Yscale.domain([minGo, maxGo]);
 
 drawbox.selectAll("rect.hist")
 	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][0][0]);})
 	.attr("height", function(d) {return Yscale(d[3][0][0]);});
 
 
@@ -263,7 +407,7 @@ drawbox.selectAll("rect.hist")
 
 //Gene A
 
-d3.select("h3.A").on("click", function() {
+d3.select("text#A.gene").on("click", function() {
    	durac = 100;
 	
 r_scale.domain([minA, maxA]);
@@ -296,15 +440,17 @@ function pulse() {
 
 Yscale.domain([minA, maxA]);
 
+
 drawbox.selectAll("rect.hist")
 	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][1][0]);})
 	.attr("height", function(d) {return Yscale(d[3][1][0]);});
 
 });
 
 //GeneB
 
-d3.select("h3.B").on("click", function() {
+d3.select("text#B.gene").on("click", function() {
    	durac = 100;
 
 r_scale.domain([minB, maxB]);
@@ -336,15 +482,17 @@ function pulse() {
 
 Yscale.domain([minB, maxB]);
 
+
 drawbox.selectAll("rect.hist")
 	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][2][0]);})
 	.attr("height", function(d) {return Yscale(d[3][2][0]);});
 
 });
 
 //GeneC
 
-d3.select("h3.C").on("click", function() {
+d3.select("text#C.gene").on("click", function() {
    	durac = 100;
 
 r_scale.domain([minC, maxC]);
@@ -378,6 +526,7 @@ Yscale.domain([minC, maxC]);
 
 drawbox.selectAll("rect.hist")
 	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][3][0]);})
 	.attr("height", function(d) {return Yscale(d[3][3][0]);});
 
 
@@ -386,7 +535,7 @@ drawbox.selectAll("rect.hist")
 
 //GeneD
 
-d3.select("h3.D").on("click", function() {
+d3.select("text#D.gene").on("click", function() {
    	durac = 100;
 
 r_scale.domain([minD, maxD]);
@@ -421,13 +570,14 @@ Yscale.domain([minD, maxD]);
 
 drawbox.selectAll("rect.hist")
 	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][4][0]);})
 	.attr("height", function(d) {return Yscale(d[3][4][0]);});
 
 });
 
 //GeneE
 
-d3.select("h3.E").on("click", function() {
+d3.select("text#E.gene").on("click", function() {
    	durac = 100;
 
 r_scale.domain([minE, maxE]);
@@ -461,13 +611,14 @@ Yscale.domain([minE, maxE]);
 
 drawbox.selectAll("rect.hist")
 	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][5][0]);})
 	.attr("height", function(d) {return Yscale(d[3][5][0]);});
 
 });
 
 //GeneF
 
-d3.select("h3.F").on("click", function() {
+d3.select("text#F.gene").on("click", function() {
    	durac = 100;
 
 r_scale.domain([minE, maxE]);
@@ -502,13 +653,14 @@ Yscale.domain([minF, maxF]);
 
 drawbox.selectAll("rect.hist")
 	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][6][0]);})
 	.attr("height", function(d) {return Yscale(d[3][6][0]);});
 
 });
 
 //GeneG
 
-d3.select("h3.G").on("click", function() {
+d3.select("text#G.gene").on("click", function() {
    	durac = 100;
 
 r_scale.domain([minG, maxG]);
@@ -542,7 +694,8 @@ Yscale.domain([minG, maxG]);
 
 drawbox.selectAll("rect.hist")
 	.transition().duration(durac).ease("linear")
-	.attr("height", function(d) {return Yscale(d[3][6][0]);});
+	.attr("y", function(d) {return 460 - Yscale(d[3][7][0]);})
+	.attr("height", function(d) {return Yscale(d[3][7][0]);});
 
 
 });
