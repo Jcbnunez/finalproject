@@ -58,7 +58,7 @@ var dataset = [
 ["F",w+(w*0.6),h+(h*0.07),[[0.339968236,0.048566891],[0.647558546,0.215852849],[0.377742485,0.161889636],[0.917374606,0.377742485],[0.593595333,0.161889636],[0.377742485,0.11],[0.269816061,0.215852849],[0.269816061,0.161889636]],w+(w*0.85)],
 ["H",w+(w*0.76),h+(h*0.07),[[0.242834455,0.032377927],[0.485668909,0.107926424],[0.647558546,0.161889636],[0.431705697,0.269816061],[0.431705697,0.161889636],[0.03,0.005],[0.161889636,0.053963212],[0.161889636,0.161889636]],w+(w*0.90)],
 ["M",w-(w*0.15),h-(h*0.36),[[0.323779273,0.037774248],[0.485668909,0.053963212],[0.107926424,0.053963212],[0.215852849,0.215852849],[0.053963212,0.053963212],[0.485668909,0.269816061],[0.809448182,0.161889636],[0.647558546,0.161889636]],w-(w*0.12)],
-["SR",w-(w*0.75),h+(h*0.50),[[0.31298663,0.037774248],[0.107926424,0.053963212],[0.323779273,0.107926424],[0,0],[,0.215852849,0.053963212],[0.05,0.004],[0.161889636,0.053963212],[0.215852849,0.215852849]],w-(w*0.17)],
+["SR",w-(w*0.75),h+(h*0.50),[[0.31298663,0.037774248],[0.107926424,0.053963212],[0.323779273,0.107926424],[0.04,0.001],[,0.215852849,0.053963212],[0.05,0.004],[0.161889636,0.053963212],[0.215852849,0.215852849]],w-(w*0.17)],
 ["Cline",w-(w*0.55),h-(h*0.32),[[0.323779273,0.021585285],[0.269816061,0.107926424],[0.269816061,0.053963212],[0.593595333,0.161889636],[0.377742485,0.053963212],[0.161889636,0.053963212],[0.593595333,0.107926424],[0.485668909,0.053963212]],w-(w*0.22)]
 
 
@@ -213,6 +213,32 @@ function pulse() {
 					.ease('sine')
 					.each("end", repeat);
 			})();}
+
+//Gene  Descriptions
+
+
+  drawbox.selectAll("rect.geneident2")
+ 	.data(dataset)
+ 	.enter()
+	.append("rect")
+	.attr("class", "geneident2")
+	.attr("x", 170)
+	.attr("y",45)
+	.attr("width", 280)
+	.attr("height", 30)
+	.attr("fill", "white");	
+
+drawbox.selectAll("text.geneident")
+.data(dataset)
+ 	.enter()
+	.append("text")
+	.attr("class", "geneident")
+	.attr("x", 180)
+	.text("Whole chromosome estimate of genetic diversity.")
+	.style("font-size", "12px")
+	.style("font-family", "arial")
+	.attr("fill", "black")
+ 	.attr("y", 65);
 
 
 //Barcharts
@@ -402,6 +428,16 @@ drawbox.selectAll("rect.hist")
 	.attr("y", function(d) {return 460 - Yscale(d[3][0][0]);})
 	.attr("height", function(d) {return Yscale(d[3][0][0]);});
 
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Whole chromosome estimate of genetic diversity.")
+
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "white")
+	.attr("width", 280)
+
 
 });
 
@@ -446,6 +482,17 @@ drawbox.selectAll("rect.hist")
 	.attr("y", function(d) {return 460 - Yscale(d[3][1][0]);})
 	.attr("height", function(d) {return Yscale(d[3][1][0]);});
 
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene A codes for Subunit 1 of protein Alpha")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "pink")
+	.attr("width", 255)
+
+
 });
 
 //GeneB
@@ -487,6 +534,17 @@ drawbox.selectAll("rect.hist")
 	.transition().duration(durac).ease("linear")
 	.attr("y", function(d) {return 460 - Yscale(d[3][2][0]);})
 	.attr("height", function(d) {return Yscale(d[3][2][0]);});
+
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene A codes for Subunit 2 of protein Alpha")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "salmon")
+	.attr("width", 255)
+
 
 });
 
@@ -531,6 +589,16 @@ drawbox.selectAll("rect.hist")
 
 
 
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene C encodes subunit 1 of protein Beta (Detox).")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "lightgreen")
+	.attr("width", 287)
+
+
 });
 
 //GeneD
@@ -573,6 +641,16 @@ drawbox.selectAll("rect.hist")
 	.attr("y", function(d) {return 460 - Yscale(d[3][4][0]);})
 	.attr("height", function(d) {return Yscale(d[3][4][0]);});
 
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene D encodes subunit 2 of protein Beta (Detox).")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "turquoise")
+	.attr("width", 287)
+
 });
 
 //GeneE
@@ -613,6 +691,16 @@ drawbox.selectAll("rect.hist")
 	.transition().duration(durac).ease("linear")
 	.attr("y", function(d) {return 460 - Yscale(d[3][5][0]);})
 	.attr("height", function(d) {return Yscale(d[3][5][0]);});
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene E encodes subunit the complete protein Gamma")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "khaki")
+	.attr("width", 310)
+
 
 });
 
@@ -656,6 +744,17 @@ drawbox.selectAll("rect.hist")
 	.attr("y", function(d) {return 460 - Yscale(d[3][6][0]);})
 	.attr("height", function(d) {return Yscale(d[3][6][0]);});
 
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene F encodes a putative protein")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "cyan")
+	.attr("width", 205)
+
+
 });
 
 //GeneG
@@ -697,6 +796,15 @@ drawbox.selectAll("rect.hist")
 	.attr("y", function(d) {return 460 - Yscale(d[3][7][0]);})
 	.attr("height", function(d) {return Yscale(d[3][7][0]);});
 
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene G encodes a putative protein")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "thistle")
+	.attr("width", 205)
 
 });
 
