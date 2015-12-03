@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Visualizing Genetic Variation in Clinal Microhabitats</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js">  
+</script>
+<style type="text/css">
+
+.yAxisRight path,
+			.yAxisRight line {
+				fill: none;
+				stroke: black;
+				shape-rendering: crispEdges;
+			}
+			
+			.yAxisRight text {
+				font-family: sans-serif;
+				font-size: 6px;
+			}
+
+
+.yAxisLeft path,
+			.yAxisLeft line {
+				fill: none;
+				stroke: black;
+				shape-rendering: crispEdges;
+			}
+			
+			.yAxisLeft text {
+				font-family: sans-serif;
+				font-size: 6px;
+			}
+
+</style>
+</head>
+
+
+<body>
+<h2>Visualizing Genetic Variation in Clinal Habitats</h2>
+<p><font face='Times'>By J.C.B. Nunez</font> </p>
+<p> <font face='Times'>This visualization looks at a toy dataset of levels of fish genetic variation in a clinal microhabitat. This interactive plots allows the user to explore estimates of diversity in 5 clinal populations and 2 reference populations across a toy chromosome (Chrm-α) and its 7 Genes (A-G)</font></p>
+
+<h2>1. Original Visualiation - Multiple Grpahs required to explore the data properly</h2>
+
+<img src="https://rawgit.com/Jcbnunez/finalproject/master/Parametrized_pi_graph.png" alt="Original Visualization" style="width:700px;height:600px;">
+
+
+<h2>2. Solution ------> Interactivity</h2>
+
+Unifies all graphs into a sinlge tool the user can explore, also allows for the addition of extra -informative- data.
+
+<h2>2.1. Elements: Static Map</h2>
+
+<img src="https://rawgit.com/Jcbnunez/finalproject/master/NBH_Sites_Map4.png" alt="The Map" style="width:700px;height:300px;">
+
+<h2>2.1. Elements: Static Chromosome Structure</h2>
+
+<Script>
+
+var colors2 = { "A":"pink", "B":"salmon", "C":"lightgreen", "D":"turquoise", "E":"khaki", "F":"cyan", "G":"violet", "Chrm-α":"white"};
+
+ var Chromosome_struct = d3.select("body").append("svg")
+    .attr("width", (700)) 
+    .attr("height", (150));
+
+
+var namedataset = [
+
+["Chrm-α", 10, 0],
+["A", 130,50],
+["B", 260,40],
+["C", 390,90],
+["D", 520,37],
+["E", 650,100],
+["F", 780,60],
+["G", 910,70]
+
+];
+
+
+Chromosome_struct.selectAll("rect.chrm")
+	.data(namedataset)
+ 	.enter()
+	.append("rect")
+	.attr("class", "chrm")
+	.attr("x", 90)
+ 	.attr("y", 11)
+	.attr("width", 850)
+	.attr("fill", "sandybrown")
+	.attr("opacity", 0.8)
+	.attr("height", 5);
+
+ Chromosome_struct.selectAll("rect.chrm1")
+	.data(namedataset)
+ 	.enter()
+	.append("rect")
+	.attr("class", "chrm1")
+	.attr("x", function(d) {return (d[1]) - 20;})
+	.attr("height", 16)
+	.attr("width", function(d) {return (d[2]);})
+ 	.attr("y", 5)
+	.attr("fill", function(d) {return colors2[d[0]];});
+
+
+
+
+</script>
+
+<h2>2.2. Elements: Dynamic Geographic Visulization of Genetic Variation</h2>
+
+<script>
+
+var namedataset = [
+
+["Chrm-α", 10, 0],
+["A", 130,50],
+["B", 260,40],
+["C", 390,90],
+["D", 520,37],
+["E", 650,100],
+["F", 780,60],
+["G", 910,70]
+
+];
+
+
+ var example_circle = d3.select("body").append("svg")
+    .attr("width", (700)) 
+    .attr("height", (300));
+
+
+
+example_circle.selectAll("circle.S")
+	.data(namedataset)
+	.enter()
+	.append("circle")
+	.attr("class", "S")
+	.attr("cx",  350)
+	.attr("cy",  150)
+	.attr("r", 50)
+	.attr("fill", "blue")
+	.attr("style", "stroke: black;")
+	.each(pulse);
+
+function pulse() {
+			var circle = example_circle.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", 70)
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", 30)
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+
+
+example_circle.selectAll("circle.K")
+	.data(namedataset)
+	.enter()
+	.append("circle")
+	.attr("class", "K")
+	.attr("cx",  350)
+	.attr("cy",  150)
+	.attr("r", 50)
+	.style("fill", "Red")
+	.style("opacity", 0.1)
+
+	;
+</script>
+<p>
+
+The Upper radious of the pulsating circle is the upper standard error. The Lower radious of the pulsating circle is the lowe standard error. The true Mean lies somewhere in between. 
+
+<h2>3. Visualization</h2>
+
+
+<script>
+
+var w = 500,
+    h = 270;
+var padding = 250;
+
+var dataset = [
+
+["NBH",w+(w*0.50),h-(h*0.62),[[0.361553521,0.04317057],[0.323779273,0.107926424],[0.053963212,0.053963212],[0.809448182,0.269816061],[0.377742485,0.107926424],[0.377742485,0.215852849],[1.025301031,0.161889636],[0.809448182,0.161889636]],w+(w*0.70),10,80],
+["SYC",w+(w*0.50),h-(h*0.40),[[0.3561572,0.048566891],[0.431705697,0.107926424],[0.269816061,0.107926424],[0.215852849,0.215852849],[0.107926424,0.053963212],[0.02,0.004],[0.701521758,0.215852849],[0.593595333,0.161889636]],w+(w*0.75),20,50],
+["P",w+(w*0.546),h-(h*0.14),[[0.307590309,0.04317057],[0.539632121,0.161889636],[0.161889636,0.107926424],[0.593595333,0.215852849],[0.485668909,0.161889636],[0.01,0.004],[0.485668909,0.161889636],[0.377742485,0.107926424]],(w+w*0.80),30,20],
+["F",w+(w*0.6),h+(h*0.07),[[0.339968236,0.048566891],[0.647558546,0.215852849],[0.377742485,0.161889636],[0.917374606,0.377742485],[0.593595333,0.161889636],[0.377742485,0.11],[0.269816061,0.215852849],[0.269816061,0.161889636]],w+(w*0.85),40,10],
+["H",w+(w*0.76),h+(h*0.07),[[0.242834455,0.032377927],[0.485668909,0.107926424],[0.647558546,0.161889636],[0.431705697,0.269816061],[0.431705697,0.161889636],[0.03,0.005],[0.161889636,0.053963212],[0.161889636,0.161889636]],w+(w*0.90),50,5],
+["M",w-(w*0.15),h-(h*0.36),[[0.323779273,0.037774248],[0.485668909,0.053963212],[0.107926424,0.053963212],[0.215852849,0.215852849],[0.053963212,0.053963212],[0.485668909,0.269816061],[0.809448182,0.161889636],[0.647558546,0.161889636]],w-(w*0.12),0,0],
+["SR",w-(w*0.75),h+(h*0.50),[[0.31298663,0.037774248],[0.107926424,0.053963212],[0.323779273,0.107926424],[0.04,0.001],[,0.215852849,0.053963212],[0.05,0.004],[0.161889636,0.053963212],[0.215852849,0.215852849]],w-(w*0.17),0,0],
+["Cline",w-(w*0.55),h-(h*0.32),[[0.323779273,0.021585285],[0.269816061,0.107926424],[0.269816061,0.053963212],[0.593595333,0.161889636],[0.377742485,0.053963212],[0.161889636,0.053963212],[0.593595333,0.107926424],[0.485668909,0.053963212]],w-(w*0.22),0,0]
+
+
+
+
+];
+
+
+
+var namedataset = [
+
+["Chrm-α", 10, 0],
+["A", 130,50],
+["B", 260,40],
+["C", 390,90],
+["D", 520,37],
+["E", 650,100],
+["F", 780,60],
+["G", 910,70]
+
+];
+
+var maxGo = d3.max(dataset, function(d) {return (d[3][0][0])+(d[3][0][1]);});
+var minGo = d3.min(dataset, function(d) {return (d[3][0][0])-(d[3][0][1]);});
+
+var maxA = d3.max(dataset, function(d) {return (d[3][1][0])+(d[3][1][1]);});
+var minA = d3.min(dataset, function(d) {return (d[3][1][0])-(d[3][1][1]);});
+
+var maxB = d3.max(dataset, function(d) {return (d[3][2][0])+(d[3][2][1]);});
+var minB = d3.min(dataset, function(d) {return (d[3][2][0])-(d[3][2][1]);});
+
+var maxC = d3.max(dataset, function(d) {return (d[3][3][0])+(d[3][3][1]);});
+var minC = d3.min(dataset, function(d) {return (d[3][3][0])-(d[3][3][1]);});
+
+var maxD = d3.max(dataset, function(d) {return (d[3][4][0])+(d[3][4][1]);});
+var minD = d3.min(dataset, function(d) {return (d[3][4][0])-(d[3][4][1]);});
+
+var maxE = d3.max(dataset, function(d) {return (d[3][5][0])+(d[3][5][1]);});
+var minE = d3.min(dataset, function(d) {return (d[3][5][0])-(d[3][5][1]);});
+
+var maxF = d3.max(dataset, function(d) {return (d[3][6][0])+(d[3][6][1]);});
+var minF = d3.min(dataset, function(d) {return (d[3][6][0])-(d[3][6][1]);});
+
+var maxG = d3.max(dataset, function(d) {return (d[3][7][0])+(d[3][7][1]);});
+var minG = d3.min(dataset, function(d) {return (d[3][7][0])-(d[3][7][1]);});
+
+var Yscale = d3.scale.linear()
+			.domain([minGo, maxGo])
+			.range([0, 60]);
+
+var Yaxscale = d3.scale.linear()
+			.domain([maxGo, minGo])
+			.range([0, 60]);
+
+//var yAxis = d3.svg.axis()
+  //  .scale(Yaxscale)
+    //.orient("left")
+    //.ticks(5);
+
+//var yAxis2 = d3.svg.axis()
+  //  .scale(Yaxscale)
+    //.orient("left")
+    //.ticks(5);
+
+
+ var yAxisLeft = d3.svg.axis().scale(Yaxscale)
+    .orient("left").ticks(5);
+
+var yAxisRight = d3.svg.axis().scale(Yaxscale)
+    .orient("left").ticks(5); 
+
+var colors = { "NBH":"red", "SYC":"yellow", "P":"brown", "F":"orange", "H":"salmon", "SR":"blue", "M":"darkblue", "NBH_SE":"grey", "SYC_SE":"grey", "P_SE":"grey", "F_SE":"grey", "H_SE":"grey", "SR_SE":"grey", "M_SE":"grey", "Cline" : "Purple" };
+
+
+var colors2 = { "A":"pink", "B":"salmon", "C":"lightgreen", "D":"turquoise", "E":"khaki", "F":"cyan", "G":"violet", "Chrm-α":"white"};
+
+ var drawbox = d3.select("body").append("svg")
+    .attr("width", (w*2)) 
+    .attr("height", (h*2));
+
+
+var g = drawbox.append("g");
+
+var img = g.append("svg:image")
+    .attr("xlink:href", "https://rawgit.com/Jcbnunez/finalproject/master/NBH_Sites_Map4.png")
+    .attr("width", w*2)
+    .attr("height", h*2);
+
+
+
+
+  //x,y coordinates for populations
+  //Cline -> x = w-(w*0.55), y = h-(h*0.32)
+  //NBH ->  x = w+(w*0.50), y = h-(h*0.36)
+  //SYC -> x = w+(w*0.50), y = h-(h*0.20)
+  //P -> x =  w+ (w*0.546), y = h - (h*0.14)
+  //F -> x = w + (w*0.6), y = h + (h*0.07)
+  //H -> x = w + (w*0.76), y =  h + (h*0.07)
+  //M -> x = w - (w*0.15), y = h - (h*0.36)
+  //SR -> x = w - (w*0.75), y = h + (h*0.50)
+
+
+
+ //standing
+
+ drawbox.selectAll("circle")
+			.data(dataset)
+			.transition().duration(1000).ease("cubic-in-out").delay(100)
+
+	
+var r_scale = d3.scale.linear()
+		.domain([minGo, maxGo])
+		.range([10, 40]); 
+
+
+drawbox.selectAll("circle.M")
+	.data(dataset)
+	.enter()
+	.append("circle")
+	.attr("class", "M")
+	.attr("cx", function(d) {return d[1];})
+	.attr("cy", function(d) {return d[2];})
+	.attr("r", function(d) {return r_scale(d[3][0][0]);})
+	.attr("fill", function(d) {return colors[d[0]];})
+	.attr("opacity", 0.8);
+
+drawbox.selectAll("circle.S")
+	.data(dataset)
+	.enter()
+	.append("circle")
+	.attr("class", "S")
+	.attr("cx", function(d) {return d[1];})
+	.attr("cy", function(d) {return d[2];})
+	.attr("r", function(d) {return (r_scale(d[3][0][0]) + r_scale(d[3][0][1]));})
+	.attr("fill", function(d) {return colors[d[0]];})
+	.attr("opacity", 0.4)
+	.attr("style", "stroke: black;")
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][0][0]) - r_scale(d[3][0][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][0][0]) + r_scale(d[3][0][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+//Gene  Descriptions
+
+
+  drawbox.selectAll("rect.geneident2")
+ 	.data(dataset)
+ 	.enter()
+	.append("rect")
+	.attr("class", "geneident2")
+	.attr("x", 170)
+	.attr("y",45)
+	.attr("width", 280)
+	.attr("height", 30)
+	.attr("fill", "white");	
+
+drawbox.selectAll("text.geneident")
+.data(dataset)
+ 	.enter()
+	.append("text")
+	.attr("class", "geneident")
+	.attr("x", 180)
+	.text("Whole chromosome estimate of genetic diversity.")
+	.style("font-size", "12px")
+	.style("font-family", "arial")
+	.attr("fill", "black")
+ 	.attr("y", 65);
+
+
+//Barcharts
+
+
+ drawbox.selectAll("rect.blank1")
+ 	.data(dataset)
+ 	.enter()
+	.append("rect")
+	.attr("class", "blank1")
+	.attr("x", w - (w*0.25) - 20 )
+	.attr("y", h + (h*0.41))
+	.attr("width", 120)
+	.attr("height", 100)
+	.style("fill", "floralwhite");
+
+
+drawbox.selectAll("rect.blank2")
+ 	.data(dataset)
+ 	.enter()
+	.append("rect")
+ 	.attr("class", "blank2")
+ 	.attr("x", w + (w*0.665) - 20 )
+ 	.attr("y", h + (h*0.42))
+ 	.attr("width", 170)
+ 	.attr("height", 100)
+ 	.style("fill", "floralwhite");
+
+
+drawbox.selectAll("rect.hist").data(dataset).enter().append("rect")
+	.attr("class", "hist")
+	.attr("x", function(d) {return d[4];})
+ 	.attr("y", function(d) {return 460 - Yscale(d[3][0][0]);})
+	.attr("width", 20)
+	.attr("fill", function(d) {return colors[d[0]];})
+	.attr("height", function(d) {return Yscale(d[3][0][0]);});
+
+
+//Barcharts axes---------------------------~~~Axis1
+
+drawbox.append("g")
+    .attr("class", "yAxisRight")
+    .attr("transform", "translate(385 ,400)")
+    .call(yAxisRight);
+
+
+
+ //Barcharts axes---------------------------~~~Axis2
+
+drawbox.append("g")
+    .attr("class", "yAxisLeft")
+    .attr("transform", "translate(845 ,400)")
+    .call(yAxisLeft);
+
+
+
+//Drawing Chrm-α------------------------------
+
+drawbox.selectAll("rect.chrm")
+	.data(dataset)
+ 	.enter()
+	.append("rect")
+	.attr("class", "chrm")
+	.attr("x", 90)
+ 	.attr("y", 11)
+	.attr("width", 850)
+	.attr("fill", "sandybrown")
+	.attr("opacity", 0.8)
+	.attr("height", 5);
+
+
+//allchromosomeGene_button---------------
+
+drawbox.selectAll("rect.chrm1")
+	.data(namedataset)
+ 	.enter()
+	.append("rect")
+	.attr("class", "chrm1")
+	.attr("x", function(d) {return (d[1]) - 20;})
+	.attr("height", 16)
+	.attr("width", function(d) {return (d[2]);})
+ 	.attr("y", 5)
+	.attr("fill", function(d) {return colors2[d[0]];});
+
+//text------------------
+
+drawbox.selectAll("text.gene")
+.data(namedataset)
+ 	.enter()
+	.append("text")
+	.attr("class", "gene")
+	.attr("id", function(d) {return d[0];})
+	.attr("x", function(d) {return (d[1]);})
+	.text( function(d) {return d[0];})
+	.style("font-size", "10px")
+	.style("font-family", "arial-black")
+	.attr("fill", "black")
+ 	.attr("y", 16)
+	.on("mouseover", function() { d3.select(this).transition().duration(300).style("font-size", "17px");})
+    .on("mouseout", function(d) { d3.select(this).transition().duration(300).style("font-size", "10px").transition().duration(300);});
+
+
+//Legends descriptions
+
+drawbox.selectAll("text.desc")
+.data(namedataset)
+ 	.enter()
+	.append("text")
+	.attr("class", "desc")
+	.attr("x", 370)
+	.text("Estimates of Diversity")
+	.style("font-size", "10px")
+	.style("font-family", "arial")
+	.attr("fill", "black")
+ 	.attr("y", 395);
+
+drawbox.selectAll("text.desc1")
+.data(namedataset)
+ 	.enter()
+	.append("text")
+	.attr("class", "desc1")
+	.attr("x", 845)
+	.text("Estimates of Diversity: Cline")
+	.style("font-size", "10px")
+	.style("font-family", "arial")
+	.attr("fill", "black")
+ 	.attr("y", 395);
+
+//Bar Graphs X axis
+
+
+drawbox.selectAll("text.xax")
+.data(dataset)
+ 	.enter()
+	.append("text")
+	.attr("class", "desc1")
+	.attr("x", function(d) {return 3+ d[4];})
+	.text(function(d) {return d[0];})
+	.style("font-size", "7px")
+	.style("font-family", "arial")
+	.attr("fill", "black")
+ 	.attr("y", 470);
+
+
+
+
+/////Transitions
+
+//Global
+
+d3.select("text#Chrm-α.gene").on("click", function() {
+   	durac = 100;
+	
+r_scale.domain([minGo, maxGo]);
+
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][0][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][0][0]) + r_scale(d[3][0][1]));})
+	.attr("fill", function(d) {return colors[d[0]];})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][0][0]) - r_scale(d[3][0][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][0][0]) + r_scale(d[3][0][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+
+Yscale.domain([minGo, maxGo]);
+
+drawbox.selectAll("rect.hist")
+	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][0][0]);})
+	.attr("height", function(d) {return Yscale(d[3][0][0]);});
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Whole chromosome estimate of genetic diversity.")
+
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "white")
+	.attr("width", 280)
+
+
+});
+
+//Gene A
+
+d3.select("text#A.gene").on("click", function() {
+   	durac = 100;
+	
+r_scale.domain([minA, maxA]);
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][1][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][1][0]) + r_scale(d[3][1][1]));})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][1][0]) - r_scale(d[3][1][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][1][0]) + r_scale(d[3][1][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+
+Yscale.domain([minA, maxA]);
+
+
+drawbox.selectAll("rect.hist")
+	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][1][0]);})
+	.attr("height", function(d) {return Yscale(d[3][1][0]);});
+
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene A codes for Subunit 1 of protein Alpha")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "pink")
+	.attr("width", 255)
+
+
+});
+
+//GeneB
+
+d3.select("text#B.gene").on("click", function() {
+   	durac = 100;
+
+r_scale.domain([minB, maxB]);
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][2][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][2][0]) + r_scale(d[3][2][1]));})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][2][0]) - r_scale(d[3][2][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][2][0]) + r_scale(d[3][2][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+Yscale.domain([minB, maxB]);
+
+
+drawbox.selectAll("rect.hist")
+	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][2][0]);})
+	.attr("height", function(d) {return Yscale(d[3][2][0]);});
+
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene A codes for Subunit 2 of protein Alpha")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "salmon")
+	.attr("width", 255)
+
+
+});
+
+//GeneC
+
+d3.select("text#C.gene").on("click", function() {
+   	durac = 100;
+
+r_scale.domain([minC, maxC]);
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][3][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][3][0]) + r_scale(d[3][3][1]));})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][3][0]) - r_scale(d[3][3][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][3][0]) + r_scale(d[3][3][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+Yscale.domain([minC, maxC]);
+
+drawbox.selectAll("rect.hist")
+	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][3][0]);})
+	.attr("height", function(d) {return Yscale(d[3][3][0]);});
+
+
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene C encodes subunit 1 of protein Beta (Detox).")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "lightgreen")
+	.attr("width", 287)
+
+
+});
+
+//GeneD
+
+d3.select("text#D.gene").on("click", function() {
+   	durac = 100;
+
+r_scale.domain([minD, maxD]);
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][4][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][4][0]) + r_scale(d[3][4][1]));})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][4][0]) - r_scale(d[3][4][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][4][0]) + r_scale(d[3][4][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+
+Yscale.domain([minD, maxD]);
+
+drawbox.selectAll("rect.hist")
+	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][4][0]);})
+	.attr("height", function(d) {return Yscale(d[3][4][0]);});
+
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene D encodes subunit 2 of protein Beta (Detox).")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "turquoise")
+	.attr("width", 287)
+
+});
+
+//GeneE
+
+d3.select("text#E.gene").on("click", function() {
+   	durac = 100;
+
+r_scale.domain([minE, maxE]);
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][5][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][5][0]) + r_scale(d[3][5][1]));})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][5][0]) - r_scale(d[3][5][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][5][0]) + r_scale(d[3][5][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+Yscale.domain([minE, maxE]);
+
+drawbox.selectAll("rect.hist")
+	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][5][0]);})
+	.attr("height", function(d) {return Yscale(d[3][5][0]);});
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene E encodes subunit the complete protein Gamma")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "khaki")
+	.attr("width", 310)
+
+
+});
+
+//GeneF
+
+d3.select("text#F.gene").on("click", function() {
+   	durac = 100;
+
+r_scale.domain([minE, maxE]);
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][6][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][6][0]) + r_scale(d[3][6][1]));})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][6][0]) - r_scale(d[3][6][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][6][0]) + r_scale(d[3][6][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+
+Yscale.domain([minF, maxF]);
+
+drawbox.selectAll("rect.hist")
+	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][6][0]);})
+	.attr("height", function(d) {return Yscale(d[3][6][0]);});
+
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene F encodes a putative protein")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "cyan")
+	.attr("width", 205)
+
+
+});
+
+//GeneG
+
+d3.select("text#G.gene").on("click", function() {
+   	durac = 100;
+
+r_scale.domain([minG, maxG]);
+
+drawbox.selectAll("circle.M")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return r_scale(d[3][7][0]);});
+
+drawbox.selectAll("circle.S")
+.transition().duration(durac).ease("cubic-in-out")
+	.attr("r", function(d) {return (r_scale(d[3][7][0]) + r_scale(d[3][7][1]));})
+	.each(pulse)
+	;
+
+function pulse() {
+			var circle = drawbox.selectAll("circle.S");
+			(function repeat() {
+				circle = circle.transition()
+					.duration(2000)
+					.attr("stroke-width", 2)
+					.attr("r", function(d) {return (r_scale(d[3][7][0]) - r_scale(d[3][7][1]));})
+					.transition()
+					.duration(2000)
+					.attr('stroke-width', 2)
+					.attr("r", function(d) {return (r_scale(d[3][7][0]) + r_scale(d[3][7][1]));})
+					.ease('sine')
+					.each("end", repeat);
+			})();}
+
+Yscale.domain([minG, maxG]);
+
+drawbox.selectAll("rect.hist")
+	.transition().duration(durac).ease("linear")
+	.attr("y", function(d) {return 460 - Yscale(d[3][7][0]);})
+	.attr("height", function(d) {return Yscale(d[3][7][0]);});
+
+
+drawbox.selectAll("text.geneident")
+	.transition().duration(durac).ease("linear")
+	.text("Gene G encodes a putative protein")
+
+drawbox.selectAll("rect.geneident2")
+	.transition().duration(durac).ease("linear")
+	.attr("fill", "violet")
+	.attr("width", 205)
+
+});
+
+
+
+
+ </script>
+ </body>
