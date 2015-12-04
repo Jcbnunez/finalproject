@@ -2,6 +2,7 @@ This is JCBN's Fork of the final project
 
 Quick Link to see visualization: https://rawgit.com/Jcbnunez/finalproject/master/finalproject.html
 
+Presentation Mode: https://rawgit.com/Jcbnunez/finalproject/master/finalproject_presentation.html
 _____________
 
 # Final Project
